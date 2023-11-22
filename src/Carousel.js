@@ -98,7 +98,6 @@ const Pagination = ({item, index, scrollX}) => {
   return (
     <Animated.View
       style={{
-        backgroundColor: '#979',
         padding: 4,
         position: 'absolute',
         bottom: 12,
