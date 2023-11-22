@@ -89,15 +89,12 @@ const ImageScroll = ({item, index, scrollX}) => {
   );
 };
 
-const Pagination = ({item, index, scrollX, count = 5}) => {
+const Pagination = ({item, index, scrollX}) => {
   const translateX = scrollX.interpolate({
     inputRange: [(index - 1) * width, index * width, (index + 1) * width],
     outputRange: [-width, 0, width],
     extrapolate: 'clamp',
   });
-
-  count = data?.length > count ? count : data?.length;
-  console.log('🚀 ~ file: Carousel.js:102 ~ Pagination ~ count:', data.length);
   return (
     <Animated.View
       style={{
@@ -109,29 +106,30 @@ const Pagination = ({item, index, scrollX, count = 5}) => {
         left: '50%',
         transform: [{translateX: -50}, {translateX}],
       }}>
-      {data?.map((_, index) => {
+      {data?.map((_, dotIndex) => {
         const inputRange = [
-          (index - 1) * width,
-          index * width,
-          (index + 1) * width,
+          (dotIndex - 1) * width,
+          dotIndex * width,
+          (dotIndex + 1) * width,
         ];
 
         const dotWidth = scrollX.interpolate({
           inputRange,
-          outputRange: [12, 30, 12],
+          outputRange: [1, 2.5, 1],
           extrapolate: 'clamp',
         });
 
         return (
           <Animated.View
-            key={index?.toString()}
+            key={dotIndex?.toString()}
             style={{
               height: 12,
               width: 12,
-              // width: dotWidth,
+              // width: dotWidth, 12,30,12
               borderRadius: 12,
               backgroundColor: '#fff',
               margin: 4,
+              transform: [{scaleX: dotWidth}],
             }}
           />
         );
