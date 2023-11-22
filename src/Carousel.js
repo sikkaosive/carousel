@@ -1,13 +1,5 @@
 import React, {useRef, useEffect} from 'react';
-import {
-  Image,
-  ScrollView,
-  View,
-  Dimensions,
-  Animated,
-  Text,
-  FlatList,
-} from 'react-native';
+import {View, Dimensions, Animated, Text} from 'react-native';
 
 const data = [
   {
@@ -37,15 +29,10 @@ const data = [
 ];
 
 const {width, height} = Dimensions.get('window');
-console.log('🚀 ~ file: Carousel.js:40 ~ width:', width);
 
 const TextScroll = ({item, index, scrollX}) => {
   const opacity = scrollX.interpolate({
-    inputRange: [
-      (index - 1) * Dimensions.get('window').width,
-      index * Dimensions.get('window').width,
-      (index + 1) * Dimensions.get('window').width,
-    ],
+    inputRange: [(index - 1) * width, index * width, (index + 1) * width],
     outputRange: [0, 1, 1],
     extrapolate: 'clamp',
   });
@@ -102,11 +89,62 @@ const ImageScroll = ({item, index, scrollX}) => {
   );
 };
 
+const Pagination = ({item, index, scrollX, count = 5}) => {
+  const translateX = scrollX.interpolate({
+    inputRange: [(index - 1) * width, index * width, (index + 1) * width],
+    outputRange: [-width, 0, width],
+    extrapolate: 'clamp',
+  });
+
+  count = data?.length > count ? count : data?.length;
+  console.log('🚀 ~ file: Carousel.js:102 ~ Pagination ~ count:', data.length);
+  return (
+    <Animated.View
+      style={{
+        backgroundColor: '#979',
+        padding: 4,
+        position: 'absolute',
+        bottom: 12,
+        flexDirection: 'row',
+        left: '50%', // Move the left edge to the center
+        transform: [{translateX: -50}, {translateX}],
+      }}>
+      {data?.map((_, index) => {
+        const inputRange = [
+          (index - 1) * width,
+          index * width,
+          (index + 1) * width,
+        ];
+
+        const dotWidth = scrollX.interpolate({
+          inputRange,
+          outputRange: [12, 30, 12],
+          extrapolate: 'clamp',
+        });
+
+        return (
+          <Animated.View
+            key={index?.toString()}
+            style={{
+              height: 12,
+              width: dotWidth,
+              borderRadius: 12,
+              backgroundColor: '#fff',
+              margin: 4,
+            }}
+          />
+        );
+      })}
+    </Animated.View>
+  );
+};
+
 const RenderItem = props => {
   return (
     <View>
       <ImageScroll {...props} />
       <TextScroll {...props} />
+      <Pagination {...props} />
     </View>
   );
 };
