@@ -106,7 +106,7 @@ const Pagination = ({item, index, scrollX, count = 5}) => {
         position: 'absolute',
         bottom: 12,
         flexDirection: 'row',
-        left: '50%', // Move the left edge to the center
+        left: '50%',
         transform: [{translateX: -50}, {translateX}],
       }}>
       {data?.map((_, index) => {
@@ -127,7 +127,8 @@ const Pagination = ({item, index, scrollX, count = 5}) => {
             key={index?.toString()}
             style={{
               height: 12,
-              width: dotWidth,
+              width: 12,
+              // width: dotWidth,
               borderRadius: 12,
               backgroundColor: '#fff',
               margin: 4,
