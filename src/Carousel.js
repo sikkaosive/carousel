@@ -114,7 +114,7 @@ const Pagination = ({item, index, scrollX}) => {
 
         const dotWidth = scrollX.interpolate({
           inputRange,
-          outputRange: [1, 2.5, 1],
+          outputRange: [1, 3, 1],
           extrapolate: 'clamp',
         });
 
