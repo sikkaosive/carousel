@@ -125,7 +125,7 @@ const Pagination = ({item, index, scrollX}) => {
               height: 12,
               width: 12,
               // width: dotWidth, 12,30,12
-              borderRadius: 12,
+              borderRadius: 6,
               backgroundColor: '#fff',
               margin: 4,
               transform: [{scaleX: dotWidth}],
