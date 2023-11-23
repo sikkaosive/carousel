@@ -114,7 +114,7 @@ const Pagination = ({item, index, scrollX}) => {
 
         const dotWidth = scrollX.interpolate({
           inputRange,
-          outputRange: [1, 3, 1],
+          outputRange: [1, 2, 1],
           extrapolate: 'clamp',
         });
 
@@ -122,10 +122,10 @@ const Pagination = ({item, index, scrollX}) => {
           <Animated.View
             key={dotIndex?.toString()}
             style={{
-              height: 12,
-              width: 12,
+              height: 8,
+              width: 8,
               // width: dotWidth, 12,30,12
-              borderRadius: 6,
+              borderRadius: 4,
               backgroundColor: '#fff',
               margin: 4,
               transform: [{scaleX: dotWidth}],
